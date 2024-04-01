@@ -82,7 +82,6 @@
         "entities.ItemFrameEntityMixin",
         "entities.LightningEntityMixin",
         "entities.LivingEntityMixin",
-        "entities.PlayerEntityMixin",
         "entities.RavagerEntityMixin",
         "entities.SheepEntityMixin",
         "entities.SnowGolemEntityMixin",
