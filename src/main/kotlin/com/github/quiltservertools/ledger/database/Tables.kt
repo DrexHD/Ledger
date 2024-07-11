@@ -5,6 +5,8 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
+import org.jetbrains.exposed.sql.QueryBuilder
+import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.alias
 import org.jetbrains.exposed.sql.javatime.timestamp
 import java.time.Instant
@@ -71,6 +73,13 @@ object Tables {
 
         init {
             index("actions_by_location", false, x, y, z, world)
+        }
+
+        override fun describe(s: Transaction, queryBuilder: QueryBuilder) {
+            super.describe(s, queryBuilder)
+            if (queryBuilder.toString().startsWith("SELECT")) {
+                queryBuilder.append(" USE INDEX (actions_by_location) ")
+            }
         }
     }
 
