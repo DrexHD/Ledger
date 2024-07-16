@@ -78,7 +78,10 @@ object Tables {
         override fun describe(s: Transaction, queryBuilder: QueryBuilder) {
             super.describe(s, queryBuilder)
             if (queryBuilder.toString().startsWith("SELECT")) {
-                queryBuilder.append(" USE INDEX (actions_by_location) ")
+                queryBuilder.append(
+                    " USE INDEX (actions_action_id, actions_object_id, actions_old_object_id, actions_source, " +
+                            "actions_player_id, actions_by_location)"
+                )
             }
         }
     }
